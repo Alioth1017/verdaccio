@@ -1,0 +1,6 @@
+.storybook
+public/
+msw
+vitest
+__snapshots__
+*.map

@@ -1,0 +1,34 @@
+{
+  "name": "@verdaccio/test-helper",
+  "version": "4.0.0-next-8.3",
+  "private": true,
+  "description": "test helpers",
+  "author": "Juan Picado <juanpicado19@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://verdaccio.org",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "devDependencies": {
+    "@verdaccio/auth": "workspace:8.0.0-next-8.10",
+    "@verdaccio/config": "workspace:8.0.0-next-8.10",
+    "@verdaccio/core": "workspace:8.0.0-next-8.10",
+    "@verdaccio/logger": "workspace:8.0.0-next-8.10",
+    "@verdaccio/middleware": "workspace:8.0.0-next-8.10",
+    "@verdaccio/types": "workspace:13.0.0-next-8.3",
+    "@verdaccio/utils": "workspace:8.1.0-next-8.10",
+    "body-parser": "1.20.3",
+    "debug": "4.4.0",
+    "express": "4.21.2",
+    "fs-extra": "11.2.0",
+    "supertest": "7.0.0"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "clean": "rimraf ./build",
+    "type-check": "tsc --noEmit -p tsconfig.build.json",
+    "build:types": "tsc --emitDeclarationOnly -p tsconfig.build.json",
+    "build:js": "babel src/ --out-dir build/ --copy-files --extensions \".ts,.tsx\" --source-maps",
+    "watch": "pnpm build:js -- --watch",
+    "build": "pnpm run build:js && pnpm run build:types"
+  }
+}

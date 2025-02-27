@@ -1,0 +1,117 @@
+name: E2E CLI
+
+on: [pull_request]
+permissions:
+  contents: read
+concurrency:
+  group: e2e-ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    name: setup e2e verdaccio
+    services:
+      verdaccio:
+        image: verdaccio/verdaccio:nightly-master
+        ports:
+          - 4873:4873
+        env:
+          NODE_ENV: production
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Install dependencies with a custom registry
+        uses: ./.github/actions/install-app
+  build:
+    needs: [prepare]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Build application with Node ${{ matrix.node_version }}
+        uses: ./.github/actions/build-app
+        with:
+          node-version: ${{ matrix.node_version }}
+      - name: Cache packages
+        uses: ./.github/actions/cache-packages
+  e2e-cli-npm:
+    needs: [prepare, build]
+    strategy:
+      fail-fast: false
+      matrix:
+        pkg:
+          [
+            npm6,
+            npm7,
+            npm8,
+            npm9,
+            npm10
+          ]
+        node: [18, 23]
+    name: ${{ matrix.pkg }}/ ubuntu-latest / ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Install dependencies with a custom registry version ${{ inputs.node-version }}
+        uses: ./.github/actions/install-app-node
+        with:
+          node-version: ${{ inputs.node_version }}
+          reporter: 'default'
+          loglevel: 'debug'
+      - name: Restore cache pnpm store
+        uses: ./.github/actions/cache-packages
+      - name: Test CLI
+        run: NODE_ENV=production pnpm test --filter ...@verdaccio/e2e-cli-${{matrix.pkg}}
+
+  e2e-cli-pnpm:
+    needs: [prepare, build]
+    strategy:
+      fail-fast: true
+      matrix:
+        pkg:
+          [
+            pnpm8,
+            pnpm9,
+            pnpm10,
+          ]
+        node: [18, 23]
+    name: ${{ matrix.pkg }}/ ubuntu-latest / ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Install dependencies with a custom registry version ${{ inputs.node-version }}
+        uses: ./.github/actions/install-app-node
+        with:
+          node-version: ${{ inputs.node_version }}
+          reporter: 'default'
+          loglevel: 'debug'
+      - name: Restore cache pnpm store
+        uses: ./.github/actions/cache-packages
+      - name: Test CLI
+        run: NODE_ENV=production pnpm test --filter ...@verdaccio/e2e-cli-${{matrix.pkg}}
+  e2e-cli-yarn:
+    needs: [prepare, build]
+    strategy:
+      fail-fast: false
+      matrix:
+        pkg:
+          [
+            yarn1,
+            yarn2,
+            yarn3,
+            yarn4
+          ]
+        node: [18, 23]
+    name: ${{ matrix.pkg }}/ ubuntu-latest / ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Install dependencies with a custom registry version ${{ inputs.node-version }}
+        uses: ./.github/actions/install-app-node
+        with:
+          node-version: ${{ inputs.node_version }}
+          reporter: 'default'
+          loglevel: 'debug'
+      - name: Restore cache pnpm store
+        uses: ./.github/actions/cache-packages
+      - name: Test CLI
+        run: NODE_ENV=production pnpm test --filter ...@verdaccio/e2e-cli-${{matrix.pkg}}
+

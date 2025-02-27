@@ -1,0 +1,22 @@
+{
+  "extends": "../../../tsconfig.reference.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./build"
+  },
+  "include": ["src/**/*.ts"],
+  "references": [
+    {
+      "path": "../../core/file-locking"
+    },
+    {
+      "path": "../../config"
+    },
+    {
+      "path": "../../logger/logger"
+    },
+    {
+      "path": "../../core/core"
+    }
+  ]
+}

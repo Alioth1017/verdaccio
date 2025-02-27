@@ -1,8 +1,18 @@
+[![BannerHelp](https://cdn.verdaccio.dev/readme/banner-uk.svg)](https://u24.gov.ua)
+
+> Verdaccio stands for **peace**, stop the war, we will be yellow / blue 🇺🇦 until that happens.
+
 ![verdaccio logo](https://cdn.verdaccio.dev/readme/verdaccio@2x.png)
 
 ![verdaccio gif](https://cdn.verdaccio.dev/readme/readme-website.png)
 
-# Version 4
+# Version Next (Development Branch)
+
+> Looking for Verdaccio version 5 or 6? Version 6 is the latest version and successor to version 5. Version 6 requires Node.js 18 or higher and is maintained in the `6.x` branch.
+
+> The plugins for versions 5 and 6 are located at the [`verdaccio/monorepo`](https://github.com/verdaccio/monorepo) repository. Plugins for the `next-8` version are hosted in this project under the `./packages/plugins` folder.
+
+> Note that contributing guidelines might be different based on the branch.
 
 [Verdaccio](https://verdaccio.org/) is a simple, **zero-config-required local private npm registry**.
 No need for an entire database just to get started! Verdaccio comes out of the box with
@@ -12,38 +22,109 @@ For those looking to extend their storage capabilities, Verdaccio
 **supports various community-made plugins to hook into services such as Amazon's s3,
 Google Cloud Storage** or create your own plugin.
 
-
 [![verdaccio (latest)](https://img.shields.io/npm/v/verdaccio/latest.svg)](https://www.npmjs.com/package/verdaccio)
 [![verdaccio (downloads)](https://img.shields.io/npm/dy/verdaccio.svg)](https://www.npmjs.com/package/verdaccio)
 [![docker pulls](https://img.shields.io/docker/pulls/verdaccio/verdaccio.svg?maxAge=43200)](https://verdaccio.org/docs/en/docker.html)
 [![backers](https://opencollective.com/verdaccio/tiers/backer/badge.svg?label=Backer&color=brightgreen)](https://opencollective.com/verdaccio)
 [![stackshare](https://img.shields.io/badge/Follow%20on-StackShare-blue.svg?logo=stackshare&style=flat)](https://stackshare.io/verdaccio)
 
-![circle ci status](https://circleci.com/gh/verdaccio/verdaccio.svg?style=shield&circle-token=:circle-token)
-[![codecov](https://img.shields.io/codecov/c/github/verdaccio/verdaccio/master.svg)](https://codecov.io/gh/verdaccio/verdaccio)
 [![discord](https://img.shields.io/discord/388674437219745793.svg)](http://chat.verdaccio.org/)
-[![node](https://img.shields.io/node/v/verdaccio/latest.svg)](https://www.npmjs.com/package/verdaccio)
 [![MIT](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/verdaccio/verdaccio/blob/master/LICENSE)
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/verdaccio/localized.svg)](https://crowdin.com/project/verdaccio)
-[![TODOs](https://badgen.net/https/api.tickgit.com/badgen/github.com/verdaccio/verdaccio)](https://www.tickgit.com/browse?repo=github.com/verdaccio/verdaccio)
 
-[![Twitter followers](https://img.shields.io/twitter/follow/verdaccio_npm.svg?style=social&label=Follow)](https://twitter.com/verdaccio_npm)
 [![Github](https://img.shields.io/github/stars/verdaccio/verdaccio.svg?style=social&label=Stars)](https://github.com/verdaccio/verdaccio/stargazers)
+[![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 
+## Versions
+
+You can find more details about the different versions of Verdaccio, minimum requirements, as well as links to associated npm packages and docker images in the [version history](VERSIONS.md).
 
 ## Install
+
+> Node.js v18 as minimum version required
 
 Install with npm:
 
 ```bash
-npm install --global verdaccio
+npm install -g verdaccio@next-8
 ```
+
+With `yarn`
+
+```bash
+yarn global add verdaccio@next-8
+```
+
+With `pnpm`
+
+```bash
+pnpm i -g verdaccio@next-8
+```
+
+or
+
+```bash
+docker pull verdaccio/verdaccio:nightly-master
+```
+
+or with _helm_ [official chart](https://github.com/verdaccio/charts).
+
+```bash
+helm repo add verdaccio https://charts.verdaccio.org
+helm repo update
+helm install verdaccio/verdaccio
+```
+
+Furthermore, you can read the [**Debugging Guidelines**](https://github.com/verdaccio/verdaccio/wiki/Debugging-Verdaccio) and the [**Docker Examples**](https://github.com/verdaccio/verdaccio/tree/master/docker-examples) for more advanced development.
+
+## Plugins
+
+You can develop your own [plugins](https://verdaccio.org/docs/plugins) with the [verdaccio generator](https://github.com/verdaccio/generator-verdaccio-plugin). Installing [Yeoman](https://yeoman.io/) is required.
+
+```
+npm install -g yo
+npm install -g generator-verdaccio-plugin
+```
+
+Learn more [here](https://verdaccio.org/docs/dev-plugins) how to develop plugins. Share your plugins with the community.
+
+## End to End Testing
+
+In our compatibility testing project, we're dedicated to ensuring that your favorite commands work seamlessly across different versions of npm, pnpm, and Yarn. From publishing packages to managing dependencies.
+Our goal is to give you the confidence to use your preferred package manager without any issues. So dive in, check out our matrix, and see how your commands fare across the board!
+
+[Learn or contribute here](https://github.com/verdaccio/verdaccio/tree/master/e2e/cli)
+
+### Commands
+
+| cmd       | npm6 | npm7 | npm8 | npm9 | npm10 | pnpm8 | pnpm9 | pnpm10 | yarn1 | yarn2 | yarn3 | yarn4 |
+| --------- | ---- | ---- | ---- | ---- | ----- | ----- | ----- | ------ | ----- | ----- | ----- | ----- |
+| publish   | ✅   | ✅   | ✅   | ✅   | ✅    | ✅    | ✅    | ✅     | ✅    | ✅    | ✅    | ✅    |
+| unpublish | ✅   | ✅   | ✅   | ✅   | ✅    | ✅    | ✅    | ❌     | ❌    | ❌    | ❌    | ❌    |
+| info      | ✅   | ✅   | ✅   | ✅   | ✅    | ✅    | ✅    | ✅     | ✅    | ✅    | ✅    | ✅    |
+| audit     | ✅   | ✅   | ✅   | ✅   | ✅    | ✅    | ✅    | ✅     | ✅    | ✅    | ✅    | ❌    |
+| install   | ✅   | ✅   | ✅   | ✅   | ✅    | ✅    | ✅    | ✅     | ✅    | ✅    | ✅    | ✅    |
+| deprecate | ✅   | ✅   | ✅   | ✅   | ✅    | ✅    | ✅    | ✅     | ⛔    | ⛔    | ⛔    | ⛔    |
+| ping      | ✅   | ✅   | ✅   | ✅   | ✅    | ✅    | ✅    | ✅     | ⛔    | ⛔    | ⛔    | ⛔    |
+| search    | ✅   | ✅   | ✅   | ✅   | ✅    | ✅    | ✅    | ✅     | ⛔    | ⛔    | ⛔    | ⛔    |
+| star      | ✅   | ✅   | ✅   | ✅   | ✅    | ✅    | ✅    | ✅     | ⛔    | ⛔    | ⛔    | ⛔    |
+| stars     | ✅   | ✅   | ✅   | ✅   | ✅    | ✅    | ✅    | ✅     | ⛔    | ⛔    | ⛔    | ⛔    |
+| dist-tag  | ✅   | ✅   | ✅   | ✅   | ✅    | ✅    | ✅    | ✅     | ✅    | ❌    | ❌    | ❌    |
+
+> notes:
+>
+> - yarn search cmd exist in _modern_ but, it do not uses the search registry endpoint.
+> - yarn _modern_ has two info commands, the one used here is `yarn npm info`
+
+❌ = no tested
+✅ = tested
+⛔ = no supported
 
 ## Donations
 
-Verdaccio is run by **volunteers**; nobody is working full-time on it. If you find this project to be useful and would like to support its development, consider making a donation - **your logo might end up in this readme.** 😉
+Verdaccio is run by **volunteers**; nobody is working full-time on it. If you find this project to be useful and would like to support its development, consider doing a long support donation - **and your logo will be on this section of the readme.**
 
-**[Donate](https://opencollective.com/verdaccio)** 💵👍🏻 starting from *$1/month* or just one single contribution.
+**[Donate](https://github.com/sponsors/verdaccio)** 💵👍🏻 starting from _$1/month_ or just one single contribution.
 
 ## What does Verdaccio do for me?
 
@@ -53,13 +134,12 @@ If you want to use all benefits of npm package system in your company without se
 
 ### Cache npmjs.org registry
 
-   If you have more than one server you want to install packages on, you might want to use this to decrease latency
-   (presumably "slow" npmjs.org will be connected to only once per package/version) and provide limited failover (if npmjs.org is down, we might still find something useful in the cache) or avoid issues like *[How one developer just broke Node, Babel and thousands of projects in 11 lines of JavaScript](https://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/)*, *[Many packages suddenly disappeared](https://github.com/npm/registry-issue-archive/issues/255)* or *[Registry returns 404 for a package I have installed before](https://github.com/npm/registry-issue-archive/issues/329)*.
+If you have more than one server you want to install packages on, you might want to use this to decrease latency
+(presumably "slow" npmjs.org will be connected to only once per package/version) and provide limited failover (if npmjs.org is down, we might still find something useful in the cache) or avoid issues like _[How one developer just broke Node, Babel and thousands of projects in 11 lines of JavaScript](https://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/)_, _[Many packages suddenly disappeared](https://github.com/npm/registry-issue-archive/issues/255)_ or _[Registry returns 404 for a package I have installed before](https://github.com/npm/registry-issue-archive/issues/329)_.
 
 ### Link multiple registries
 
 If you use multiples registries in your organization and need to fetch packages from multiple sources in one single project you might take advance of the uplinks feature with Verdaccio, chaining multiple registries and fetching from one single endpoint.
-
 
 ### Override public packages
 
@@ -68,22 +148,35 @@ If you want to use a modified version of some 3rd-party package (for example, yo
 ### E2E Testing
 
 Verdaccio has proved to be a lightweight registry that can be
-booted in a couple of seconds, fast enough for any CI. Many open source projects use verdaccio for end to end testing, to mention some examples, **create-react-app**, **mozilla neutrino**, **pnpm**, **storybook**, **alfresco** or **eclipse theia**. You can read more in dedicated article to E2E in our blog.
+booted in a couple of seconds, fast enough for any CI. Many open source projects use Verdaccio for end to end testing, to mention some examples, **create-react-app**, **mozilla neutrino**, **pnpm**, **storybook**, **babel.js**, **angular-cli** or **docusaurus**. You can read more in [here](https://verdaccio.org/docs/e2e).
 
-## Talks
+Furthermore, here few examples how to start:
 
-**Next talk**: [Verdaccio - A lightweight Private Proxy Registry built in Node.js | Juan Picado at The Destro Dev Show](https://www.youtube.com/watch?reload=9&v=P_hxy7W-IL4&ab_channel=TheDestroDevShow)
+- [e2e-ci-example-gh-actions](https://github.com/juanpicado/e2e-ci-example-gh-actions)
+- [verdaccio-end-to-end-tests](https://github.com/juanpicado/verdaccio-end-to-end-tests)
+- [verdaccio-fork](https://github.com/juanpicado/verdaccio-fork)
 
-##### **OpenJS World 2020** about *Cover your Projects with a Multi purpose Lightweight Node.js Registry*. 
+## Watch our Videos
 
-[![verdaccio openjsworld](https://cdn.verdaccio.dev/readme/youtube_openjsword_2020.png)](https://www.youtube.com/watch?v=oVCjDWeehAQ)
+**Node 2022, February 2022, Online Free**
 
+<div>
+   <a href="https://portal.gitnation.org/contents/five-ways-of-taking-advantage-of-verdaccio-your-private-and-proxy-nodejs-registry">
+     <img src="https://cdn.verdaccio.dev/readme/nodejscongress2022.jpg" alt="nodejs" width="200"/>
+  </a>
+</div>
 
-You might want to check out as well our previous talks: 
+You might want to check out as well our previous talks:
 
-* [ViennaJS Meetup - Introduction to Verdaccio by **Priscila Olivera** and **Juan Picado**](https://www.youtube.com/watch?v=hDIFKzmoCa)
-* [Open Source? trivago - Verdaccio (**Ayush** and **Juan Picado**) January 2020](https://www.youtube.com/watch?v=A5CWxJC9xzc)
-* [GitNation Open Source Stage - How we have built a Node.js Registry with React - **Juan Picado** December 2019](https://www.youtube.com/watch?v=gpjC8Qp9B9A)
+- [Using Docker and Verdaccio to make Integration Testing Easy - **Docker All Hands #4 December - 2021**](https://www.youtube.com/watch?v=zRI0skF1f8I)
+- [**Juan Picado** – Testing the integrity of React components by publishing in a private registry - React Finland - 2021](https://www.youtube.com/watch?v=bRKZbrlQqLY&t=16s&ab_channel=ReactFinland)
+- [BeerJS Cba Meetup No. 53 May 2021 - **Juan Picado**](https://www.youtube.com/watch?v=6SyjqBmS49Y&ab_channel=BeerJSCba)
+- [Node.js Dependency Confusion Attacks - April 2021 - **Juan Picado**](https://www.youtube.com/watch?v=qTRADSp3Hpo)
+- [**OpenJS World 2020** about \*Cover your Projects with a Multi purpose Lightweight Node.js Registry - **Juan Picado**](https://www.youtube.com/watch?v=oVCjDWeehAQ)
+- [ViennaJS Meetup - Introduction to Verdaccio by **Priscila Olivera** and **Juan Picado**](https://www.youtube.com/watch?v=hDIFKzmoCa)
+- [Open Source? trivago - Verdaccio (**Ayush** and **Juan Picado**) January 2020](https://www.youtube.com/watch?v=A5CWxJC9xzc)
+- [GitNation Open Source Stage - How we have built a Node.js Registry with React - **Juan Picado** December 2019](https://www.youtube.com/watch?v=gpjC8Qp9B9A)
+- [Verdaccio - A lightweight Private Proxy Registry built in Node.js | **Juan Picado** at The Destro Dev Show](https://www.youtube.com/watch?reload=9&v=P_hxy7W-IL4&ab_channel=TheDestroDevShow)
 
 ## Get Started
 
@@ -96,10 +189,11 @@ verdaccio
 You would need set some npm configuration, this is optional.
 
 ```bash
-$ npm set registry http://localhost:4873/
+npm set registry http://localhost:4873/
 ```
 
 For one-off commands or to avoid setting the registry globally:
+
 ```bash
 NPM_CONFIG_REGISTRY=http://localhost:4873 npm i
 ```
@@ -119,7 +213,7 @@ npm adduser --registry http://localhost:4873
 > if you use HTTPS, add an appropriate CA information ("null" means get CA list from OS)
 
 ```bash
-$ npm set ca null
+npm set ca null
 ```
 
 #### 2. publish your package
@@ -130,24 +224,18 @@ npm publish --registry http://localhost:4873
 
 This will prompt you for user credentials which will be saved on the `verdaccio` server.
 
-
 ## Docker
 
 Below are the most commonly needed information,
 every aspect of Docker and verdaccio is [documented separately](https://www.verdaccio.org/docs/en/docker.html)
 
-
 ```
-docker pull verdaccio/verdaccio
+docker pull verdaccio/verdaccio:nightly-master
 ```
 
 Available as [tags](https://hub.docker.com/r/verdaccio/verdaccio/tags/).
 
-```
-docker pull verdaccio/verdaccio:4
-```
-
-### Running verdaccio using Docker
+### Running Verdaccio using Docker
 
 To run the docker container:
 
@@ -155,80 +243,91 @@ To run the docker container:
 docker run -it --rm --name verdaccio -p 4873:4873 verdaccio/verdaccio
 ```
 
-Docker examples are available [in this repository](https://github.com/verdaccio/docker-examples).
+Docker examples are available [in this repository](https://github.com/verdaccio/verdaccio/tree/master/docker-examples).
 
 ## Compatibility
 
-Verdaccio aims to support all features of a standard npm client that make sense to support in private repository. Unfortunately, it isn't always possible.
+Verdaccio aims to support all features of a standard npm client that make sense to support in a private repository. Unfortunately, it isn't always possible.
 
 ### Basic features
 
-- Installing packages (npm install, npm upgrade, etc.) - **supported**
-- Publishing packages (npm publish) - **supported**
+- Installing packages (`npm install`, `npm update`, etc.) - **supported**
+- Publishing packages (`npm publish`) - **supported**
 
 ### Advanced package control
 
-- Unpublishing packages (npm unpublish) - **supported**
-- Tagging (npm tag) - **supported**
-- Deprecation (npm deprecate) - **supported**
+- Unpublishing packages (`npm unpublish`) - **supported**
+- Tagging (`npm dist-tag`) - **supported**
+- Deprecation (`npm deprecate`) - **supported**
 
 ### User management
 
-- Registering new users (npm adduser {newuser}) - **supported**
-- Change password (npm profile set password)  - **supported**
-- Transferring ownership (npm owner add {user} {pkg}) - not supported, *PR-welcome*
-- Token (npm token) - (more info [#1427](https://github.com/verdaccio/verdaccio/pull/1427)) - **supported**
+- Registering new users (`npm adduser {newuser}`) - **supported**
+- Change password (`npm profile set password`) - **supported**
+- Transferring ownership (`npm owner`) - **supported**
+- Token (`npm token`) - **supported**
 
-### Miscellany
+### Miscellaneous
 
-- Searching (npm search) - **supported** (cli / browser)
-- Ping (npm ping) - **supported**
-- Starring (npm star, npm unstar, npm stars) - **supported**
+- Searching (`npm search`) - **supported** (cli / browser)
+- Ping (`npm ping`) - **supported**
+- Starring (`npm star`, `npm unstar`, `npm stars`) - **supported**
 
 ### Security
 
-- npm/yarn audit - **supported**
+- Audit (`npm/yarn audit`) - **supported**
 
 ## Report a vulnerability
 
 If you want to report a security vulnerability, please follow the steps which we have defined for you in our [security policy](https://github.com/verdaccio/verdaccio/security/policy).
 
-## Core Team
+## Special Thanks
 
-The core team is responsible for driving this project ahead, team is ordered by antiquity and areas of responsibility.
+Thanks to the following companies to help us to achieve our goals providing free open source licenses. Every company provides enough resources to move this project forward.
 
-|  [Juan Picado](https://github.com/juanpicado) |  [Ayush Sharma](https://github.com/ayusharma)  | [Sergio Hg](https://github.com/sergiohgz)  |
-|---|---|---|
-| ![jotadeveloper](https://avatars3.githubusercontent.com/u/558752?s=120&v=4)  | ![ayusharma](https://avatars2.githubusercontent.com/u/6918450?s=120&v=4)     | ![sergiohgz](https://avatars2.githubusercontent.com/u/14012309?s=120&v=4) |
-| [@jotadeveloper](https://twitter.com/jotadeveloper)  | [@ayusharma_](https://twitter.com/ayusharma_) | [@sergiohgz](https://twitter.com/sergiohgz)  |
-| All areas  |  All areas | Docker,Builds,Stack, Monorepo |
-| [Priscila Oliveria](https://github.com/priscilawebdev) | [Daniel Ruf](https://github.com/DanielRuf) |
-| ![priscilawebdev](https://avatars2.githubusercontent.com/u/29228205?s=120&v=4) | ![DanielRuf](https://avatars3.githubusercontent.com/u/827205?s=120&v=4) |
-| [@priscilawebdev](https://twitter.com/priscilawebdev) | [@DanielRufde](https://twitter.com/DanielRufde) |
-| UI, Stack  | All areas  |
+| Company      | Logo                                                                                                                            | License                                                                           |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| JetBrains    | [![jetbrain](assets/thanks/jetbrains/logo.png)](https://www.jetbrains.com/)                                                     | JetBrains provides licenses for products for active maintainers, renewable yearly |
+| Crowdin      | [![crowdin](assets/thanks/crowdin/logo.png)](https://crowdin.com/)                                                              | Crowdin provides platform for translations                                        |
+| BrowserStack | [![browserstack](https://cdn.verdaccio.dev/readme/browserstack_logo.png)](https://www.browserstack.com/)                        | BrowserStack provides plan to run End to End testing for the UI                   |
+| Netlify      | [![netlify](https://www.netlify.com/img/global/badges/netlify-color-accent.svg)](https://www.netlify.com/)                      | Netlify provides pro plan for website deployment                                  |
+| Algolia      | [![algolia](https://cdn.verdaccio.dev/sponsor/logo/algolia/logo.png)](https://algolia.com/)                                     | Algolia provides search services for the website                                  |
+| Docker       | [![docker](https://cdn.verdaccio.dev/sponsor/logo/docker/docker.png)](https://www.docker.com/community/open-source/application) | Docker offers unlimited pulls and unlimited egress to any and all users           |
 
-You can find and chat with then over Discord, click [here](http://chat.verdaccio.org) or follow them at *Twitter*.
+## Maintainers
+
+| [Juan Picado](https://github.com/juanpicado)                                   | [Ayush Sharma](https://github.com/ayusharma)                             | [Sergio Hg](https://github.com/sergiohgz)                                 |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| ![jotadeveloper](https://avatars3.githubusercontent.com/u/558752?s=120&v=4)    | ![ayusharma](https://avatars2.githubusercontent.com/u/6918450?s=120&v=4) | ![sergiohgz](https://avatars2.githubusercontent.com/u/14012309?s=120&v=4) |
+|                                                                                | [@ayusharma\_](https://twitter.com/ayusharma_)                           | [@sergiohgz](https://twitter.com/sergiohgz)                               |
+| [Priscila Oliveria](https://github.com/priscilawebdev)                         | [Daniel Ruf](https://github.com/DanielRuf)                               |
+| ![priscilawebdev](https://avatars2.githubusercontent.com/u/29228205?s=120&v=4) | ![DanielRuf](https://avatars3.githubusercontent.com/u/827205?s=120&v=4)  |
+| [@priscilawebdev](https://twitter.com/priscilawebdev)                          | [@DanielRufde](https://twitter.com/DanielRufde)                          |
+
+You can find and chat with them over Discord, click [here](http://chat.verdaccio.org).
 
 ## Who is using Verdaccio?
 
-* [create-react-app](https://github.com/facebook/create-react-app/blob/master/CONTRIBUTING.md#customizing-e2e-registry-configuration) *(+86.2k ⭐️)*
-* [Gatsby](https://github.com/gatsbyjs/gatsby) *(+49.2k ⭐️)*
-* [Babel.js](https://github.com/babel/babel) *(+38.5k ⭐️)*
-* [Vue CLI](https://github.com/vuejs/vue-cli) *(+27.4k ⭐️)*
-* [Angular CLI](https://github.com/angular/angular-cli) *(+24.3k ⭐️)*
-* [Uppy](https://github.com/transloadit/uppy) *(+23.8k ⭐️)*
-* [bit](https://github.com/teambit/bit) *(+13k ⭐️)*
-* [Aurelia Framework](https://github.com/aurelia/framework) *(+11.6k ⭐️)*
-* [pnpm](https://github.com/pnpm/pnpm) *(+10.1k ⭐️)*
-* [ethereum/web3.js](https://github.com/ethereum/web3.js) *(+9.8k ⭐️)*
-* [NX](https://github.com/nrwl/nx) *(+6.1k ⭐️)*
-* [webiny-js](https://github.com/webiny/webiny-js) *(+4.3k ⭐️)*
-* [Mozilla Neutrino](https://github.com/neutrinojs/neutrino) *(+3.7k ⭐️)*
-* [workshopper how to npm](https://github.com/workshopper/how-to-npm) *(+1k ⭐️)*
-* [Amazon SDK v3](https://github.com/aws/aws-sdk-js-v3)
-* [Amazon Encryption SDK for Javascript](https://github.com/aws/aws-encryption-sdk-javascript)
+- [create-react-app](https://github.com/facebook/create-react-app/blob/master/CONTRIBUTING.md#customizing-e2e-registry-configuration) _(+86.2k ⭐️)_
+- [Grafana](https://github.com/grafana/grafana/search?q=verdaccio) _(+54.9k ⭐️)_
+- [Gatsby](https://github.com/gatsbyjs/gatsby) _(+49.2k ⭐️)_
+- [Babel.js](https://github.com/babel/babel) _(+38.5k ⭐️)_
+- [Docusaurus](https://github.com/facebook/docusaurus) _(+34k ⭐️)_
+- [Vue CLI](https://github.com/vuejs/vue-cli) _(+27.4k ⭐️)_
+- [Angular CLI](https://github.com/angular/angular-cli) _(+24.3k ⭐️)_
+- [Uppy](https://github.com/transloadit/uppy) _(+23.8k ⭐️)_
+- [bit](https://github.com/teambit/bit) _(+13k ⭐️)_
+- [Aurelia Framework](https://github.com/aurelia/framework) _(+11.6k ⭐️)_
+- [pnpm](https://github.com/pnpm/pnpm) _(+10.1k ⭐️)_
+- [ethereum/web3.js](https://github.com/ethereum/web3.js) _(+9.8k ⭐️)_
+- [Webiny CMS](https://github.com/webiny/webiny-js) _(+6.6k ⭐️)_
+- [NX](https://github.com/nrwl/nx) _(+6.1k ⭐️)_
+- [Mozilla Neutrino](https://github.com/neutrinojs/neutrino) _(+3.7k ⭐️)_
+- [workshopper how to npm](https://github.com/workshopper/how-to-npm) _(+1k ⭐️)_
+- [Amazon SDK v3](https://github.com/aws/aws-sdk-js-v3)
+- [Amazon Encryption SDK for Javascript](https://github.com/aws/aws-encryption-sdk-javascript)
 
-🤓 Don't be shy, you also can be in [the list](https://github.com/verdaccio/website/blob/master/docs/who-is-using.md).
+🤓 Don't be shy, add yourself to this readme.
 
 ## Open Collective Sponsors
 
@@ -251,15 +350,6 @@ Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com
 
 [![backers](https://opencollective.com/verdaccio/backers.svg?width=890)](https://opencollective.com/verdaccio#backers)
 
-## Special Thanks
-
-Thanks to the following companies to help us to achieve our goals providing free open source licenses.
-
-[![jetbrain](assets/thanks/jetbrains/logo.png)](https://www.jetbrains.com/)
-[![crowdin](assets/thanks/crowdin/logo.png)](https://crowdin.com/)
-[![browserstack](https://cdn.verdaccio.dev/readme/browserstack_logo.png)](https://www.browserstack.com/)
-[![balsamiq](assets/thanks/balsamiq/logo.jpg)](https://balsamiq.com/)
-
 ## Contributors
 
 This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
@@ -268,21 +358,20 @@ This project exists thanks to all the people who contribute. [[Contribute](CONTR
 
 ### FAQ / Contact / Troubleshoot
 
-If you have any issue you can try the following options, do no desist to ask or check our issues database, perhaps someone has asked already what you are looking for.
+If you have any issue you can try the following options. Do no hesitate to ask or check our issues database. Perhaps someone has asked already what you are looking for.
 
-* [Blog](https://verdaccio.org/blog/)
-* [Donations](https://opencollective.com/verdaccio)
-* [Reporting an issue](https://github.com/verdaccio/verdaccio/blob/master/CONTRIBUTING.md#reporting-a-bug)
-* [Running discussions](https://github.com/verdaccio/verdaccio/issues?q=is%3Aissue+is%3Aopen+label%3Adiscuss)
-* [Chat](http://chat.verdaccio.org/)
-* [Logos](https://verdaccio.org/docs/en/logo)
-* [Docker Examples](https://github.com/verdaccio/docker-examples)
-* [FAQ](https://github.com/verdaccio/verdaccio/issues?utf8=%E2%9C%93&q=is%3Aissue%20label%3Aquestion%20)
-
+- [Blog](https://verdaccio.org/blog/)
+- [Donations](https://github.com/sponsors/verdaccio)
+- [Reporting an issue](https://github.com/verdaccio/verdaccio/issues/new/choose)
+- [Running discussions](https://github.com/verdaccio/verdaccio/issues?q=is%3Aissue+is%3Aopen+label%3Adiscuss)
+- [Chat](https://discord.gg/7qWJxBf)
+- [Logos](https://verdaccio.org/docs/en/logo)
+- [Docker Examples](https://github.com/verdaccio/verdaccio/tree/master/docker-examples)
+- [FAQ](https://github.com/verdaccio/verdaccio/discussions/categories/q-a)
 
 ### License
 
 Verdaccio is [MIT licensed](https://github.com/verdaccio/verdaccio/blob/master/LICENSE)
 
-The Verdaccio documentation and logos (excluding /thanks, e.g., .md, .png, .sketch)  files within the /assets folder) is
- [Creative Commons licensed](https://creativecommons.org/licenses/by/4.0/).
+The Verdaccio documentation and logos (excluding /thanks, e.g., .md, .png, .sketch) files within the /assets folder) is
+[Creative Commons licensed](https://creativecommons.org/licenses/by/4.0/).

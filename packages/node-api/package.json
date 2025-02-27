@@ -1,0 +1,62 @@
+{
+  "name": "@verdaccio/node-api",
+  "version": "8.0.0-next-8.10",
+  "description": "node API",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "author": {
+    "name": "Juan Picado",
+    "email": "juanpicado19@gmail.com"
+  },
+  "repository": {
+    "type": "https",
+    "url": "https://github.com/verdaccio/verdaccio"
+  },
+  "homepage": "https://verdaccio.org",
+  "keywords": [
+    "private",
+    "package",
+    "repository",
+    "registry",
+    "enterprise",
+    "modules",
+    "proxy",
+    "server",
+    "verdaccio"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "clean": "rimraf ./build",
+    "type-check": "tsc --noEmit -p tsconfig.build.json",
+    "build:types": "tsc --emitDeclarationOnly -p tsconfig.build.json",
+    "build:js": "babel src/ --out-dir build/ --copy-files --extensions \".ts,.tsx\" --source-maps",
+    "watch": "pnpm build:js -- --watch",
+    "build": "pnpm run build:js && pnpm run build:types",
+    "test": "vitest run"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@verdaccio/config": "workspace:8.0.0-next-8.10",
+    "@verdaccio/core": "workspace:8.0.0-next-8.10",
+    "@verdaccio/logger": "workspace:8.0.0-next-8.10",
+    "@verdaccio/server": "workspace:8.0.0-next-8.10",
+    "@verdaccio/server-fastify": "workspace:8.0.0-next-8.10",
+    "core-js": "3.40.0",
+    "debug": "4.4.0",
+    "lodash": "4.17.21"
+  },
+  "devDependencies": {
+    "@verdaccio/types": "workspace:13.0.0-next-8.3",
+    "selfsigned": "2.4.1",
+    "supertest": "7.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/verdaccio"
+  }
+}

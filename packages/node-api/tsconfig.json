@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.reference.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./build"
+  },
+  "include": ["src/**/*.ts", "types/*.d.ts"],
+  "exclude": ["src/**/*.test.ts"],
+  "references": [
+    {
+      "path": "../config"
+    },
+    {
+      "path": "../logger/logger"
+    },
+    {
+      "path": "../server/express"
+    },
+    {
+      "path": "../server/fastify"
+    }
+  ]
+}

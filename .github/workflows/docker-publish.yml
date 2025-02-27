@@ -4,24 +4,28 @@ on:
   push:
     paths:
       - .github/workflows/docker-publish.yml
-      - 'src/**'
-      - 'conf/**'
-      - 'types/**'
+      - .github/workflows/docker-publish.yml
+      - 'packages/**'
       - 'docker-bin/**'
-      - 'bin/**'
       - 'package.json'
-      - 'yarn.lock'
+      - 'pnpm-*.yaml'
+      - 'Dockerfile'
+      - '.dockerignore'
     branches:
-      - '**'
+      - 'master'
     tags:
       - 'v*'
+
+permissions:
+  contents: read  #  to fetch code (actions/checkout)
 
 jobs:
   docker:
     runs-on: ubuntu-latest
+    if: github.repository == 'verdaccio/verdaccio'
     steps:
-      - uses: actions/checkout@v2
-      - uses: docker/setup-qemu-action@v1
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: docker/setup-qemu-action@53851d14592bedcffcf25ea515637cff71ef929a # v3.3.0
       - uses: docker/setup-buildx-action@v1
         with:
           driver-opts: network=host
@@ -35,14 +39,15 @@ jobs:
         uses: crazy-max/ghaction-docker-meta@v1
         with:
           images: ${{ github.repository }}
-          tag-custom: 4.x-next
+          tag-custom: nightly-master
           tag-custom-only: ${{ github.ref == 'refs/heads/master' }}
+          tag-latest: false
           tag-semver: |
             {{version}}
             {{major}}
             {{major}}.{{minor}}
       - name: Build & Push
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
